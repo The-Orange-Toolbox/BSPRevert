@@ -4,7 +4,7 @@ import traceback
 from datetime import datetime
 
 from valvebsp import Bsp
-from valvevmf import Vmf
+from valvevmf import Vmf, VmfNode
 
 from totcommon.logger import print_header, stdout
 from totcommon.updater import check_updates
@@ -37,8 +37,17 @@ if __name__ == '__main__':
         stdout('Loading {}'.format(os.path.abspath(in_bsp)))
 
         bsp = Bsp(in_bsp)
-        # ~magic~
         vmf = Vmf()
+
+        for ent in bsp[0]:
+            entity = VmfNode('entity')
+            for prop in ent:
+                if prop[0] == 'hammerid':
+                    prop[0] = 'id'
+                elif prop[0] == 'model':
+                    continue
+                entity.properties.append(tuple(prop))
+            vmf.nodes.append(entity)
 
         stdout('Writing {}'.format(os.path.abspath(out_vmf)))
         vmf.save(out_vmf)
