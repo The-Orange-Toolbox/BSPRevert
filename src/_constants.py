@@ -1,0 +1,5 @@
+ORGNAME = "The Orange Toolbox"
+NAME = "BSPRevert"
+VERSION = "0.1.0"
+BUILD_DATE = "Dec 30 2021"
+URL = "https://github.com/The-Orange-Toolbox/BSPRevert"
