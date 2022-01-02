@@ -6,6 +6,9 @@ from datetime import datetime
 from valvebsp import Bsp
 from valvevmf import Vmf, VmfNode
 
+from brushes import make_world
+from entities import make_entities
+
 from totcommon.logger import print_header, stdout
 from totcommon.updater import check_updates
 from totcommon.reporter import ErrorReporter
@@ -39,15 +42,8 @@ if __name__ == '__main__':
         bsp = Bsp(in_bsp)
         vmf = Vmf()
 
-        for ent in bsp[0]:
-            entity = VmfNode('entity')
-            for prop in ent:
-                if prop[0] == 'hammerid':
-                    prop[0] = 'id'
-                elif prop[0] == 'model':
-                    continue
-                entity.properties.append(tuple(prop))
-            vmf.nodes.append(entity)
+        #vmf.nodes = vmf.nodes + make_entities(bsp)
+        vmf.nodes.append(make_world(bsp))
 
         stdout('Writing {}'.format(os.path.abspath(out_vmf)))
         vmf.save(out_vmf)

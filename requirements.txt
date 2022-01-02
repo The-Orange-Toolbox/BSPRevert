@@ -1,3 +1,3 @@
 git+git://github.com/The-Orange-Toolbox/TOT-common
-valvebsp
-valvevmf
+git+git://github.com/pySourceSDK/ValveBSP
+git+git://github.com/pySourceSDK/ValveVMF
